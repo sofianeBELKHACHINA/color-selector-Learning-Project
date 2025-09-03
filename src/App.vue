@@ -6,6 +6,15 @@ const selectedColor = ref('rgb(245, 245, 245)')
 const selectColor = (color) => {
   selectedColor.value = color
 }
+
+const copyToClipBoard = async () => {
+  try {
+    await navigator.clipboard.writeText(selectedColor.value)
+    alert(`${selectedColor.value} has been copied`)
+  } catch (error) {
+    alert('Cannot copy', error)
+  }
+}
 </script>
 
 <template>
@@ -30,7 +39,7 @@ const selectColor = (color) => {
       <section>
         <div>
           <p>{{ selectedColor }}</p>
-          <div class="selectedColor"></div>
+          <div class="selectedColor" @click="copyToClipBoard"></div>
         </div>
       </section>
     </div>
